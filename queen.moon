@@ -10,4 +10,4 @@ export class Queen extends Piece
     }
 
     get_possible_moves: (board) =>
-        return Util.rider_moves_in_dirs(board, @get_pos!, @dirs)
+        return Util.rider_moves_in_dirs(board, self, @dirs)

@@ -1,12 +1,14 @@
-require "bishop"
 require "config"
+require "bishop"
+require "queen"
+require "knight"
 
 board = {}
 for i = 0, Config.rows
     board[i] = {}
 
-p = Bishop!
-p\set_pos(3, 6)
+p = Knight!
+p\set_pos(6, 3)
 moves = p\get_possible_moves board
 print #moves
 print "#{move[1]} #{move[2]}" for move in *moves
