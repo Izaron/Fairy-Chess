@@ -13,6 +13,9 @@ export class PieceMoveCount extends Piece
         super pos_x, pos_y
         @move_count += 1
 
+    set_move_count: (count) =>
+        @move_count = count
+
     -- Getters
     get_move_count: =>
         @move_count

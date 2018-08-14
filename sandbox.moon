@@ -1,7 +1,7 @@
 require "config"
 require "bishop"
 require "queen"
-require "knight"
+require "../love/knight"
 require "rook"
 
 board = {}

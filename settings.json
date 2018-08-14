@@ -1,0 +1,17 @@
+{
+    "cellSize": 40,
+    "rows": 8,
+    "columns": 12,
+
+    "whiteCellColor": {
+        "red": 0.9375,
+        "green": 0.84765625,
+        "blue": 0.70703125
+    },
+
+    "blackCellColor": {
+        "red": 0.70703125,
+        "green": 0.53125,
+        "blue": 0.38671875
+    }
+}
