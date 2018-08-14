@@ -47,6 +47,6 @@ export class Piece
         @__class
 
     -- The functions to be overriden in child classes
-    get_possible_moves: (pieces) =>  -- 'pieces' is the set of all pieces
-                                     --  on the board
+    get_possible_moves: (board) =>  -- 'board' represented as a table,
+                                    -- containing all pieces
         -- Return nothing

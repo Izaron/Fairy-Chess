@@ -1,7 +1,6 @@
 -- Boilerplate line to access the Piece and Helper classes
-require "piece"
-require "helper"
-free = Helper.is_cell_free
+require "piece_move_count"
+require "util"
 
 -- Pawns have an ability to move 1 cells forward, but attack in diagonal
 -- directions
@@ -13,32 +12,25 @@ free = Helper.is_cell_free
 -- 3.  En passant - a pawn capture that can only occur immediately after a pawn
 --     makes a double-step move from its starting square, and it could have been
 --     captured by an enemy pawn had it advanced only one square.
-export class Pawn extends Piece
-    new: =>
-        super!
-        @move_count = 0  -- Used to control powers 1 and 3
-
-    set_pos: (pos_x, pos_y) =>
-        super pos_x, pos_y
-        @move_count += 1
-
-    get_possible_moves: (pieces) =>
-        pos_x, pos_y = @pos
+export class Pawn extends PieceMoveCount
+    -- TODO: En passant, superpower 2
+    get_possible_moves: (board) =>
+        x, y = get_pos!
         local res
 
         -- Add the first superpower and the regular move
         -- Add a move forward 1 cell
-        if free(pieces[pos_x][pos_y + 1])
-            table.insert res {pos_x, pos_y + 1}
+        if Util.is_free board[x][y + 1]
+            table.insert res {x, y + 1}
             -- Well, is it possible to go 2 cells forward?
-            if @move_count == 0
-                if free(pieces[pos_x][pos_y + 2])
-                    table.insert res {pos_x, pos_y + 2}
+            if get_move_count! == 0
+                if Util.is_free board[x][y + 2]
+                    table.insert res, {x, y + 2}
 
-        -- Add the attacking moves
-        if not free(pieces[pos_x - 1][pos_y + 1])
-            table.insert res {pos_x - 1, pos_y + 1}
-        if not free(pieces[pos_x + 1][pos_y + 1])
-            table.insert res {pos_x + 1, pos_y + 1}
+        -- Add the attack moves
+        for add_x = -1, 1, 2  -- add_x = {-1, 1}
+            if not Util.is_free board[x + add_x][y + 1]
+                if board[x + add_x][y + 1]\get_player_id! != get_player_id!
+                    table.insert res, {x + add_x, y + 1}
 
-        -- TODO: DO IT ALL
+        return res

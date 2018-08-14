@@ -1,4 +1,4 @@
--- It is a template to create another chess pieces
+-- It is a template to create another chess board
 -- A Dummy does literally nothing and just stands on a cell,
 -- waiting to be eaten.
 -- So this is a good piece to be copied and tuned
@@ -26,7 +26,7 @@ export class Dummy extends Piece
         super piece_class
         -- Override me!
 
-    get_possible_moves: (pieces) =>
-        super pieces
+    get_possible_moves: (board) =>
+        super board
         -- Override me!
         -- I can't go anywhere, pls push me somebody...

@@ -1,11 +1,14 @@
 require "piece"
 require "pawn"
+require "rook"
+require "config"
 
-p = Pawn!
-p\set_pos(i, i) for i = 1, 10
-print p.move_count
-print p\get_name!
-pp = p\get_pos!
-print pp[1]
-print pp[2]
-print #pp
+board = {}
+for i = 0, Config.rows
+    board[i] = {}
+
+p = Rook!
+p\set_pos(3, 6)
+moves = p\get_possible_moves board
+print #moves
+print "#{move[1]} #{move[2]}" for move in *moves
