@@ -1,3 +1,11 @@
+package.path = "?.lua;" .. package.path
+package.path = "pieces/?.lua;" .. package.path
+package.path = "love2d-modules/?.lua;" .. package.path
+
+require "settings"
+
+LOVE2DFOLDER = "love2d-modules/"
+
 love.conf = (t) ->
     t.modules.audio = false
     t.modules.event = true
@@ -16,12 +24,12 @@ love.conf = (t) ->
     t.modules.window = true
     t.modules.thread = false
 
-    export rapidjson = require("rapidjson")
-    export settings = rapidjson.load("love2d/settings.json")
+--     export rapidjson = require("rapidjson")
+--     export settings = rapidjson.load(LOVE2DFOLDER .. "settings.json")
 
-    t.window.width = settings["columns"] * settings["cell_size"]
-    t.window.height  = settings["rows"] * settings["cell_size"]
+    t.window.width = Settings["columns"] * Settings["cell_size"]
+    t.window.height  = Settings["rows"] * Settings["cell_size"]
 
     t.window.title = "Fairy Chess"
-    t.window.icon = "icon.png"
+    t.window.icon = LOVE2DFOLDER .. "icon.png"
 

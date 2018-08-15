@@ -1,12 +1,10 @@
-package.path = "?.lua;" .. package.path
-package.path = "pieces/?.lua;" .. package.path
-
 require "assets"
+require "settings"
 require "knight"
 
 
 -- Local variables
-{:cell_size, :white_color, :black_color, :rows, :columns, :font_size} = settings
+{:cell_size, :white_color, :black_color, :rows, :columns, :font_size} = Settings
 white_modulo = 0  -- Either 0 or 1, shows which color will have the top left cell
 
 
