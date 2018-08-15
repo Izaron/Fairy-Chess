@@ -1,9 +1,13 @@
 package.path = "?.lua;" .. package.path
 package.path = "pieces/?.lua;" .. package.path
 
+require "knight"
+
+
 -- Local variables
 {:cell_size, :white_color, :black_color, :rows, :columns, :font_size} = settings
 white_modulo = 0  -- Either 0 or 1, shows which color will have the top left cell
+assets = {}  -- Loaded images from the 'assets/' folder
 
 
 -- Generates a table of positions in chess order
@@ -55,10 +59,42 @@ draw_cues = ->
         love.graphics.print(tostring(rows - i), 0,
             i * cell_size)
 
+
+load_assets = ->
+    folder = "assets/"
+    files = love.filesystem.getDirectoryItems(folder)
+    for file in *files
+        key = file\sub(0, file\find(".", 1, true) - 1)
+        print "load #{file}"
+        assets[key] = love.graphics.newImage(folder .. file)
+
+
+draw_piece = (piece) ->
+    {pos_x, pos_y} = piece\get_pos()
+    img = assets[piece\get_image()]
+    love.graphics.draw(img, pos_x * cell_size, pos_y * cell_size, 0,
+        cell_size / img\getWidth())
+
+
+local knight
+
 love.load = ->
     love.graphics.setNewFont(font_size)
+    load_assets()
+    knight = Knight()
+
 
 -- The main draw function
+cnt = 0
+cnt_y = 0
 love.draw = ->
     draw_cells()
     draw_cues()
+    love.graphics.setColor(1, 1, 1)
+    knight\set_pos(math.floor(cnt / 10), cnt_y)
+    cnt += 1
+    if cnt == columns * 10
+        cnt = 0
+        cnt_y += 1
+        cnt_y %= rows
+    draw_piece(knight)

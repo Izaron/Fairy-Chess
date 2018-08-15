@@ -4,6 +4,7 @@ require "util"
 
 -- The Knight is a (1, 2)-leaper
 export class Knight extends Piece
+    image: "knight_white"
     dir: {1, 2}
 
     get_possible_moves: (board) =>

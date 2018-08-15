@@ -1,7 +1,7 @@
 {
-    "cell_size": 64,
+    "cell_size": 80,
     "rows": 8,
-    "columns": 12,
+    "columns": 8,
 
     "white_color": {
         "red": 0.9375,
