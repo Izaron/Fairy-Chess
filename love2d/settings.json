@@ -1,17 +1,19 @@
 {
-    "cellSize": 40,
+    "cell_size": 64,
     "rows": 8,
     "columns": 12,
 
-    "whiteCellColor": {
+    "white_color": {
         "red": 0.9375,
         "green": 0.84765625,
         "blue": 0.70703125
     },
 
-    "blackCellColor": {
+    "black_color": {
         "red": 0.70703125,
         "green": 0.53125,
         "blue": 0.38671875
-    }
+    },
+
+    "font_size": 24
 }

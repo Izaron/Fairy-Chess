@@ -1,7 +1,9 @@
+package.path = "pieces/?.lua;" .. package.path
+
 require "config"
 require "bishop"
 require "queen"
-require "../love/knight"
+require "knight"
 require "rook"
 
 board = {}
