@@ -1,8 +1,5 @@
 -- This is a helper module for move generation
 require "config"
-log_console = require"logging.console"
-
-logger = log_console()
 
 --------------------------------------------------------------------------------
 -------------------- OTHER FUNCTIONS
@@ -49,7 +46,7 @@ gen_all_dir_permutations = (dir) ->
                 table.insert(all_dirs, {mx * x, my * y})
             if set_insert(dir_set, {my * y, mx * x})
                 table.insert(all_dirs, {my * y, mx * x})
-    logger\debug "dir #{pos[1]} #{pos[2]}" for pos in *all_dirs
+    print "dir #{pos[1]} #{pos[2]}" for pos in *all_dirs
     return all_dirs
 
 --------------------------------------------------------------------------------
