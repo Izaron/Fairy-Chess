@@ -1,21 +1,25 @@
-extern "C" {
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
-#include <luajit.h>
-}
-
 #include <iostream>
+#include <string>
 
-int main() {
-    lua_State* state = luaL_newstate();
+#include "options.h"
 
-    if (luaL_loadfile(state, "script.lua") || lua_pcall(state, 0, 0, 0)) {
-        std::cerr << "Error" << std::endl;
-        return 0;
+using namespace spiel_mit_mir;
+
+int main(int argc, char** argv) {
+    auto& opt = get_options();
+    opt.init();
+
+    if (!opt.parse_command_line(argc, argv)) {
+        return 2;
     }
 
-    lua_close(state);
+    if (!opt.parse_config_file("non-existing-file.what")) {
+        return 2;
+    }
 
-    return 0;
+    if (!opt.notify()) {
+        return 2;
+    } else {
+        std::cout << opt.get_map()["beta"].as<std::string>() << std::endl;
+    }
 }
