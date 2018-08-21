@@ -8,7 +8,7 @@
 #include <string>
 #include <utility>
 
-#include <boost/exception/diagnostic_information.hpp> 
+#include <boost/exception/diagnostic_information.hpp>
 
 namespace spiel_mit_mir {
 
@@ -20,12 +20,11 @@ options &get_options() {
 
 void options::init() {
     desc_.add_options()
-        // TODO: real options
+        // TODO(Izaron): real options
         ("alpha", opt::value<int>()->default_value(13071999), "what's this?")
         ("beta", opt::value<std::string>()->required(), "or this?")
 
-        ("help", "produce help message")
-    ;
+        ("help", "produce help message");
 }
 
 void options::parse_command_line(int argc, char** argv) {
@@ -36,8 +35,7 @@ void options::parse_config_file(boost::string_view file) {
     opt::store(
         opt::parse_config_file<char>(
             file.data(),
-            desc_
-        ),
+            desc_),
     var_map_);
 }
 
@@ -51,4 +49,4 @@ const decltype(options::var_map_)& options::get_map() {
     return var_map_;
 }
 
-}  // spiel_mit_mir
+}  // namespace spiel_mit_mir

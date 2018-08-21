@@ -32,15 +32,15 @@ namespace spiel_mit_mir {
  *    // options::unlock()   <--- not mandatory, proves thread safety
  * */
 class options : public boost::serialization::singleton<options> {
-  private:
+private:
     // Stores all passed arguments in a hash map
     boost::program_options::variables_map var_map_;
 
     // Used to define all options and their descriptions and properties
-    //std::shared_ptr<boost::program_options::options_description> desc_;
+    // std::shared_ptr<boost::program_options::options_description> desc_;
     boost::program_options::options_description desc_;
 
-  public:
+public:
     // In order to be used as singleton<T> , the type T must be default
     // constructable.
     options() {}
@@ -66,6 +66,6 @@ class options : public boost::serialization::singleton<options> {
 // Used to access the singleton in a more convenient way
 options &get_options();
 
-}  // spiel_mit_mir
+}  // namespace spiel_mit_mir
 
 #endif  // SRC_OPTIONS_H_

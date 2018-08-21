@@ -2,17 +2,16 @@
  * Copyright (c) 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  * */
-#include <iostream>
-#include <fstream>
-#include <string>
-
 #include <signal.h>
 
-#include <boost/stacktrace.hpp> 
-#include <boost/filesystem.hpp> 
+#include <fstream>
+#include <iostream>
+#include <string>
+
+#include <boost/filesystem.hpp>
+#include <boost/stacktrace.hpp>
 
 #include "options.h"
-
 
 void my_signal_handler(int signum) {
     ::signal(signum, SIG_DFL);
@@ -20,7 +19,7 @@ void my_signal_handler(int signum) {
     ::raise(SIGABRT);
 }
 
-using namespace spiel_mit_mir;
+using spiel_mit_mir::get_options;
 
 int main(int argc, char** argv) {
     ::signal(SIGSEGV, &my_signal_handler);
