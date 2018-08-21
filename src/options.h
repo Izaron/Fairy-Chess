@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Evgeny Shulgin <izaronplatz@gmail.com>
+ * This code is released under the license described in the LICENSE file
+ * */
 #ifndef SRC_OPTIONS_H_
 #define SRC_OPTIONS_H_
 
@@ -51,7 +55,7 @@ class options : public boost::serialization::singleton<options> {
     void parse_config_file(boost::string_view file);
 
     // Should be called after we've parsed all needed sources
-    // Returns 'false' if a required variable wasn't provided
+    // Throws an exception if a required variable wasn't provided
     // it's critical to have all required values
     void notify();
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Evgeny Shulgin <izaronplatz@gmail.com>
+ * This code is released under the license described in the LICENSE file
+ * */
 #include "options.h"
 
 #include <iostream>
