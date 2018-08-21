@@ -45,15 +45,15 @@ class options : public boost::serialization::singleton<options> {
     void init();
 
     // Parses arguments from `int main(...)`
-    bool parse_command_line(int argc, char** argv);
+    void parse_command_line(int argc, char** argv);
 
     // Parses arguments from config files, usually with .cfg extension
-    bool parse_config_file(boost::string_view file);
+    void parse_config_file(boost::string_view file);
 
     // Should be called after we've parsed all needed sources
     // Returns 'false' if a required variable wasn't provided
     // it's critical to have all required values
-    bool notify();
+    void notify();
 
     // Variables map getter
     const decltype(var_map_)& get_map();
