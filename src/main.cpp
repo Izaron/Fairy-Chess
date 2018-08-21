@@ -12,20 +12,12 @@
 #include <boost/stacktrace.hpp>
 
 #include "options.h"
-
-void my_signal_handler(int signum) {
-    ::signal(signum, SIG_DFL);
-    std::cerr << boost::stacktrace::stacktrace() << std::endl;
-    ::raise(SIGABRT);
-}
-
-using spiel_mit_mir::get_options;
+#include "custom_handlers.h"
 
 int main(int argc, char** argv) {
-    ::signal(SIGSEGV, &my_signal_handler);
-    ::signal(SIGABRT, &my_signal_handler);
+    spiel_mit_mir::init_custom_handlers();
 
-    auto& opt = get_options();
+    auto& opt = spiel_mit_mir::get_options();
     opt.init();
 
     opt.parse_command_line(argc, argv);
