@@ -7,8 +7,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 file(GLOB SOURCE_FILES "src/*cpp")
 
-# Definitions
-add_definitions(-DBOOST_STACKTRACE_USE_BACKTRACE)
+if (${TARGET_PLATFORM} STREQUAL "linux")
+    add_definitions(-DBOOST_STACKTRACE_USE_BACKTRACE)
+else() # not linux
+    add_definitions(-DBOOST_STACKTRACE_USE_NOOP)
+endif()
+
 add_definitions(-DBOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED)
 
 # Lua
@@ -30,4 +34,6 @@ target_link_libraries(spiel_mit_mir ${LUA_LIBRARIES})
 target_link_libraries(spiel_mit_mir ${Boost_LIBRARIES})
 target_link_libraries(spiel_mit_mir "pthread")
 target_link_libraries(spiel_mit_mir "dl")
-target_link_libraries(spiel_mit_mir "backtrace")
+if (${TARGET_PLATFORM} STREQUAL "linux")
+    target_link_libraries(spiel_mit_mir "backtrace")
+endif()

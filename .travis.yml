@@ -56,9 +56,9 @@ install:
 script:
     - mkdir build
     - cd build
-    - sudo cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+    - sudo cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_PLATFORM=$TRAVIS_OS_NAME
     - sudo cmake --build . 
-    - sudo ./spiel_mit_mir --beta beta
+    - sudo ./spiel_mit_mir
 
 notifications:
     email:
