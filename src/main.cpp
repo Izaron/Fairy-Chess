@@ -21,7 +21,6 @@ int main(int argc, char** argv) {
     opt.init();
 
     opt.parse_command_line(argc, argv);
-    opt.parse_config_file("non-existing-file.what");
     opt.notify();
     std::cout << opt.get_map()["beta"].as<std::string>() << std::endl;
 }

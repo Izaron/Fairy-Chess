@@ -1,8 +1,9 @@
 # Boost 1.68 requires CMake 3.12 or newer
 cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 11)
 project(SpielMitMir)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 file(GLOB SOURCE_FILES "src/*cpp")
 
@@ -15,7 +16,7 @@ include_directories(${LUA_INCLUDE_DIR})
 
 # Boost
 find_package(Boost 1.68 COMPONENTS program_options
-    serialization system stacktrace_backtrace filesystem REQUIRED)
+    serialization system filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Threads

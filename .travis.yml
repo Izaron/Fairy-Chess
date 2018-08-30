@@ -1,0 +1,65 @@
+dist: trusty
+sudo: required
+language: cpp
+
+os:
+    - linux
+    - osx
+
+compiler:
+    - gcc
+
+env:
+    - BUILD_CONFIGURATION=Debug
+    - BUILD_CONFIGURATION=Release
+
+install:
+    - echo "$TRAVIS_OS_NAME"
+
+    ############################################################################
+    # Install a recent Boost
+    ############################################################################
+    - echo "Installing Boost"
+    - sudo wget -O boost_1_68_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.68.0/boost_1_68_0.tar.gz/download >/dev/null 2>&1
+    - sudo tar xzvf boost_1_68_0.tar.gz >/dev/null 2>&1
+    - cd boost_1_68_0/
+    # boost lbraries: program_options serialization system filesystem
+    - sudo ./bootstrap.sh --prefix=/usr/local -with-libraries=program_options,serialization,system,filesystem >/dev/null 2>&1
+    - sudo ./b2 link=shared threading=multi variant=release >/dev/null 2>&1
+    - sudo ./b2 install >/dev/null 2>&1
+    - cd ..
+
+    ############################################################################
+    # Install a recent CMake
+    ############################################################################
+    - echo "Installing CMake"
+    - sudo wget https://cmake.org/files/v3.12/cmake-3.12.1.tar.gz >/dev/null 2>&1
+    - sudo gunzip -c cmake-3.12.1.tar.gz | sudo tar xopf -
+    - cd cmake-3.12.1
+    - sudo ./bootstrap >/dev/null 2>&1
+    - sudo make >/dev/null 2>&1
+    - sudo make install >/dev/null 2>&1
+    - cmake --version
+    - cd ..
+
+    ############################################################################
+    # Install a recent Lua
+    ############################################################################
+    - echo "Installing Lua"
+    - sudo wget http://www.lua.org/ftp/lua-5.3.5.tar.gz >/dev/null 2>&1
+    - sudo gunzip -c lua-5.3.5.tar.gz | sudo tar xopf -
+    - cd lua-5.3.5
+    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo make linux install >/dev/null 2>&1; fi
+    - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo make macosx install >/dev/null 2>&1; fi
+    - cd ..
+
+script:
+    - mkdir build
+    - cd build
+    - sudo cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION
+    - sudo cmake --build . 
+    - sudo ./spiel_mit_mir --beta beta
+
+notifications:
+    email:
+        false
