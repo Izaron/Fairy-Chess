@@ -9,6 +9,7 @@ file(GLOB SOURCE_FILES "src/*cpp")
 
 # Definitions
 add_definitions(-DBOOST_STACKTRACE_USE_BACKTRACE)
+add_definitions(-DBOOST_STACKTRACE_GNU_SOURCE_NOT_REQUIRED)
 
 # Lua
 find_package(Lua 5.3 REQUIRED)

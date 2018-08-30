@@ -24,7 +24,7 @@ install:
     - sudo tar xzvf boost_1_68_0.tar.gz >/dev/null 2>&1
     - cd boost_1_68_0/
     # boost lbraries: program_options serialization system filesystem
-    - sudo ./bootstrap.sh --prefix=/usr/local -with-libraries=program_options,serialization,system,filesystem >/dev/null 2>&1
+    - sudo ./bootstrap.sh --prefix=/usr/local -with-libraries=program_options,serialization,system,filesystem
     - sudo ./b2 link=shared threading=multi variant=release >/dev/null 2>&1
     - sudo ./b2 install >/dev/null 2>&1
     - cd ..
@@ -37,7 +37,7 @@ install:
     - sudo gunzip -c cmake-3.12.1.tar.gz | sudo tar xopf -
     - cd cmake-3.12.1
     - sudo ./bootstrap >/dev/null 2>&1
-    - sudo make >/dev/null 2>&1
+    - sudo make
     - sudo make install >/dev/null 2>&1
     - cmake --version
     - cd ..
